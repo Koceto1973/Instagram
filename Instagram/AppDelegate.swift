@@ -1,21 +1,20 @@
-//
-//  AppDelegate.swift
-//  Instagram
-//
-//  Created by Robert Percival on 13/06/2017.
-//  Copyright © 2017 Robert Percival. All rights reserved.
-//
-
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let configuration = ParseClientConfiguration {
+            
+        }
+        Parse.initialize(with: configuration)
+        
         return true
     }
 
