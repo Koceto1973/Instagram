@@ -6,9 +6,17 @@ class UserTableViewController: UITableViewController {
     var usernames = [""]
     var objectIds = [""]
     var isFollowing = ["" : false]
+    var refresher: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refresher.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        refresher.addTarget(self, action: #selector(UserTableViewController.updateTable), for: UIControlEvents.valueChanged )
+        tableView.addSubview(refresher)
+    }
+    
+    @objc func updateTable(){
         let query = PFUser.query()
         query?.whereKey("username", notEqualTo: PFUser.current()?.username as Any)
         query?.findObjectsInBackground(block: { (things, error) in
@@ -36,7 +44,10 @@ class UserTableViewController: UITableViewController {
                                         } else {
                                             self.isFollowing[objectId] = false
                                         }
-                                        self.tableView.reloadData()
+                                        if self.usernames.count == self.isFollowing.count {
+                                            self.tableView.reloadData()
+                                            self.refresher.endRefreshing()
+                                        }
                                     }
                                 })
                             }
