@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,11 +112,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Users" id="ImQ-a9-Bvt">
-                        <barButtonItem key="leftBarButtonItem" title="Post" id="9hP-76-kd3">
-                            <connections>
-                                <segue destination="QKJ-07-OBN" kind="show" id="PyB-Xg-buk"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Post" id="9hP-76-kd3">
+                                <connections>
+                                    <segue destination="QKJ-07-OBN" kind="show" id="PyB-Xg-buk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Feed" id="wa4-Rj-Tkv">
+                                <connections>
+                                    <segue destination="8rz-WH-QT5" kind="show" id="aq6-wB-9LI"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="rTK-5p-J8L">
                             <connections>
                                 <action selector="logoutUser:" destination="43l-kG-J10" id="ct6-Ws-5ka"/>
@@ -192,6 +200,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKR-0y-W2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2572" y="135.38230884557723"/>
+        </scene>
+        <!--Your Feed-->
+        <scene sceneID="UBm-MV-ANU">
+            <objects>
+                <tableViewController title="Your Feed" id="8rz-WH-QT5" customClass="FeedTableViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="EjW-fi-o6B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="253" id="Zmd-Eo-6Uh" customClass="FeedTableViewCell" customModule="Instagram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="253"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zmd-Eo-6Uh" id="tfH-E3-IGu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="252.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sa0-dt-B0R">
+                                            <rect key="frame" x="67" y="22" width="240" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csq-hP-Swc">
+                                            <rect key="frame" x="166" y="212" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u90-PG-0UU">
+                                            <rect key="frame" x="172" y="167" width="31" height="15"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="comment" destination="u90-PG-0UU" id="ya3-C8-Ogr"/>
+                                    <outlet property="postedImage" destination="sa0-dt-B0R" id="JjX-65-HMW"/>
+                                    <outlet property="userInfo" destination="csq-hP-Swc" id="Xyg-5r-1DE"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8rz-WH-QT5" id="ySp-B2-ba5"/>
+                            <outlet property="delegate" destination="8rz-WH-QT5" id="veD-f3-Ebw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEz-1C-MZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2572" y="841.52923538230891"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LlB-S3-DAX">
